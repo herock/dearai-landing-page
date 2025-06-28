@@ -1,0 +1,209 @@
+/* --- V2.0 - Timeless Classic Style --- */
+
+/* 1. Root & Variables
+/* ---------------------------------- */
+:root {
+    --bg-color: #FDFBF6; /* Warm, aged paper off-white */
+    --text-color: #3C3C3C; /* Soft, warm dark grey */
+    --accent-color: #800020; /* Deep, literary burgundy */
+    --footer-text-color: #AAAAAA; /* Subtle, light grey for footer */
+    --letter-border-color: #EAEAEA; /* A faint line for the letter example */
+    
+    --font-heading: 'Lora', serif;
+    /* --font-body: 'Inter', sans-serif; */
+    --font-body: 'Lato', sans-serif;
+}
+
+/* 2. Global Resets & Body Styling
+/* ---------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 17px; /* Comfortable base font size for desktop */
+    line-height: 1.7; /* Generous line height for readability */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 3. Typography
+/* ---------------------------------- */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--accent-color); /* The main heading gets the accent color for emphasis */
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #5a0016; /* A slightly darker shade of the burgundy */
+}
+
+strong {
+    font-weight: 700;
+}
+
+/* 4. Layout & Sections
+/* ---------------------------------- */
+.container {
+    max-width: 700px; /* Perfect width for a comfortable, book-like reading line */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.content-section, .hero-section, .cta-end-section {
+    padding: 5rem 0; /* Generous vertical spacing creates a calm, airy feel */
+}
+
+.hero-section {
+    padding: 6rem 0;
+}
+
+/* 5. Components
+/* ---------------------------------- */
+
+/* Call to Action Button */
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 5px;
+    border: 2px solid var(--accent-color);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    margin-top: 1rem;
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+}
+
+/* Lists */
+.steps-list, .features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.steps-list li, .features-list li {
+    margin-bottom: 2rem;
+}
+
+.features-list h3 {
+    text-align: left;
+}
+
+/* --- Redesigned "Letter Exchange" Section --- */
+.letter-exchange {
+    background-color: #fff; /* A slightly crisper white for contrast */
+    border: 1px solid var(--letter-border-color);
+    border-radius: 3px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.letter-exchange p {
+    margin-bottom: 2rem;
+}
+
+.letter-exchange p:last-child {
+    margin-bottom: 0;
+}
+
+.letter-date {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #999;
+    text-align: right;
+    margin-bottom: 2rem;
+}
+
+.ai-reply {
+    margin-top: 2rem;
+    padding-left: 2rem; /* Indentation to signify a reply */
+    border-left: 2px solid var(--accent-color);
+}
+
+.ai-reply i {
+    color: var(--text-color);
+}
+
+/* 6. Footer
+/* ---------------------------------- */
+footer {
+    padding: 2.5rem 0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+    color: var(--footer-text-color);
+    margin: 0;
+}
+
+/* 7. Responsive Design
+/* ---------------------------------- */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .content-section, .hero-section, .cta-end-section {
+        padding: 4rem 0;
+    }
+
+    .hero-section {
+        padding: 5rem 0;
+    }
+}
