@@ -10,8 +10,8 @@
     --letter-border-color: #EAEAEA; /* A faint line for the letter example */
     
     --font-heading: 'Lora', serif;
-    /* --font-body: 'Inter', sans-serif; */
-    --font-body: 'Lato', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    /* --font-body: 'Lato', sans-serif; */
 }
 
 /* 2. Global Resets & Body Styling
