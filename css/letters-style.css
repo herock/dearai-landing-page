@@ -130,5 +130,9 @@
 }
 
 .letter-item-entry {
+    margin-bottom: 1.5rem;
+}
+
+.letter-list-group {
     margin-bottom: 3rem;
 }
