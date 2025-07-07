@@ -1,25 +1,19 @@
 export async function onRequest(context) {
-    try {
-      const { env, params, request } = context;
+    const { params } = context;
   
-      // 准备一个对象来存放我们要检查的所有调试信息
-      const debugInfo = {
-        message: "DearAI Pages Function - Debugging Session",
-        request_url: request.url,
-        did_env_exist: typeof env !== 'undefined',
-        env_keys: env ? Object.keys(env) : "env object does not exist.",
-        is_articles_bucket_defined: env ? (typeof env.ARTICLES_BUCKET !== 'undefined') : "N/A",
-        articles_bucket_type: env ? typeof env.ARTICLES_BUCKET : "N/A",
-        params_path_value: params.path,
-      };
+    // 我们只检查 params 对象本身和它的 path 属性
+    const debugInfo = {
+      message: "Second Debugging Attempt: Checking 'params'",
+      is_params_defined: typeof params !== 'undefined',
+      params_path_raw: "Not yet checked", // 先设为默认值
+    };
   
-      // 将调试信息格式化为 JSON 字符串并返回
-      return new Response(JSON.stringify(debugInfo, null, 2), {
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-    } catch (e) {
-      // 如果连上面的调试代码都出错了，就把错误信息返回
-      return new Response(e.stack || e.toString(), { status: 500 });
+    // 只有在 params 确认存在时，才去尝试访问它的 path 属性
+    if (debugInfo.is_params_defined) {
+      debugInfo.params_path_raw = params.path;
     }
+    
+    return new Response(JSON.stringify(debugInfo, null, 2), {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
