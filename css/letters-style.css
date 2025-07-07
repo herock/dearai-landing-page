@@ -24,45 +24,56 @@
     text-decoration: none;
 }
 
-/* 2. Letter List (Card Style from Original Screenshot)
+/* 2. Letter List (Final Correction based on Visual Diff)
 /* ---------------------------------- */
 .letter-list {
     max-width: 700px;
     margin: 0 auto;
 }
+
+/* The <article> tag is only used for spacing between cards */
 .letter-item {
-    margin-bottom: 2rem; /* Space between cards */
+    margin-bottom: 2rem; 
 }
-.letter-link {
+
+/* The <a> tag IS THE CARD. All visual styles apply to it. */
+.letter-item .letter-link {
     display: block;
     padding: 2rem;
     border: 1px solid var(--letter-border-color); /* Default light grey border */
     border-radius: 3px;
-    text-decoration: none;
-    color: var(--text-color);
+    text-decoration: none; /* Remove underline */
+    color: var(--text-color); /* Set default text color */
     transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
-.letter-link:hover {
+
+/* The hover effect applies to the link/card */
+.letter-item .letter-link:hover {
     border-color: var(--accent-color); /* Burgundy border on hover */
     transform: translateY(-5px);      /* Move up on hover */
 }
-.letter-link header, .letter-link p {
-    text-align: left;
-}
+
+/* Style the elements INSIDE the link/card */
 .letter-item-date {
     font-size: 0.85rem;
     color: #888;
     margin-bottom: 0.25rem;
+    text-align: left;
 }
+
 .letter-item-title {
     font-size: 1.75rem;
     margin-top: 0;
     margin-bottom: 1rem;
+    color: var(--accent-color); /* Ensure the title is burgundy */
+    text-align: left;
 }
+
 .letter-item-excerpt {
     font-size: 1rem;
     line-height: 1.6;
     margin: 0;
+    text-align: left;
 }
 
 /* 3. Letter Detail Page
