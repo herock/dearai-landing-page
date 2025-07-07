@@ -30,52 +30,35 @@
     max-width: 700px;
     margin: 0 auto;
 }
-
-/* 2. Letter List (Corrected for Worker's HTML structure)
-/* ---------------------------------- */
-
-/* The card itself is the <article> element */
 .letter-item {
+    margin-bottom: 2rem; /* Space between cards */
+}
+.letter-link {
+    display: block;
     padding: 2rem;
     border: 1px solid var(--letter-border-color); /* Default light grey border */
     border-radius: 3px;
-    margin-bottom: 2rem; /* Space between cards */
+    text-decoration: none;
+    color: var(--text-color);
     transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
-
-/* The hover effect applies to the card */
-.letter-item:hover {
+.letter-link:hover {
     border-color: var(--accent-color); /* Burgundy border on hover */
     transform: translateY(-5px);      /* Move up on hover */
 }
-
-/* The link inside the card should cover the whole area */
-.letter-item .letter-link {
-    display: block;
-    text-decoration: none;
-    color: var(--text-color);
-    margin: -2rem; /* Magic trick: make the link fill the padded area of the parent */
-    padding: 2rem; /* Counteract the negative margin for the content inside */
-}
-
-/* Ensure text inside is left-aligned */
-.letter-item header, .letter-item p {
+.letter-link header, .letter-link p {
     text-align: left;
 }
-
 .letter-item-date {
     font-size: 0.85rem;
     color: #888;
     margin-bottom: 0.25rem;
 }
-
 .letter-item-title {
     font-size: 1.75rem;
     margin-top: 0;
     margin-bottom: 1rem;
-    color: var(--accent-color); /* This ensures the title is red */
 }
-
 .letter-item-excerpt {
     font-size: 1rem;
     line-height: 1.6;
