@@ -1,34 +1,31 @@
 export async function onRequest(context) {
-    const { env, params, request, next } = context;
+    // 从上下文中解构所需的对象
+    const { env, params } = context;
     const bucket = env.ARTICLES_BUCKET;
   
-    // 1. 检查请求是否来自我们的 Function 自身，避免无限循环
-    // 这是个安全措施，防止 next() 调用后又回到这里
-    if (request.headers.get('x-pages-function-invoked')) {
-      return next();
-    }
-  
-    // 2. 构造 R2 中的对象键 (Object Key)
+    // 1. 构造 R2 中的对象键
+    // params.path 是一个数组，例如 ['letters', 'some-article.html']
     let key = 'alex/' + params.path.join('/');
   
-    // 3. 处理对目录的请求，默认查找 index.html
+    // 2. 如果请求的是目录 (如 /alex/ 或 /alex/letters/)，
+    //    则默认提供该目录下的 index.html。
+    //    注意：我们不再检查路径是否包含点。
     if (key.endsWith('/')) {
       key += 'index.html';
     }
   
-    // 4. 从 R2 获取对象
+    // 3. 从 R2 获取对象
     const object = await bucket.get(key);
   
-    // 5. 如果在 R2 中没有找到对象，把请求交给 Pages 的静态处理器
+    // 4. 如果对象未找到，返回一个明确的 404 响应
     if (object === null) {
-      // 设置一个请求头，标记我们已经尝试过 Function 处理
-      const newRequest = new Request(request);
-      newRequest.headers.set('x-pages-function-invoked', 'true');
-      // 把带有标记的新请求交给 next()
-      return next(newRequest);
+      // 我们可以返回一个简单的文本 404
+      return new Response(`Object Not Found: ${key}`, { status: 404 });
+      // 或者，如果你有一个自定义的静态 404.html 页面在你的项目根目录，
+      // 可以用 context.next() 去获取它，但直接返回更简单可靠。
     }
   
-    // 6. 成功找到对象，返回响应
+    // 5. 成功找到对象，构建并返回响应
     const headers = new Headers();
     object.writeHttpMetadata(headers);
     headers.set('etag', object.httpEtag);
