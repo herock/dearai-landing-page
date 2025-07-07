@@ -1,6 +1,6 @@
-/* ==== Styles for Alex's Pages (Restored from Original Design) ==== */
+/* Styles for Alex's Pages (List & Detail) */
 
-/* 1. Page Header (For List & Detail)
+/* 1. Page Header
 /* ---------------------------------- */
 .page-header {
     text-align: center;
@@ -8,57 +8,68 @@
     border-bottom: 1px solid var(--letter-border-color);
     margin-bottom: 4rem;
 }
+
 .page-header h1 {
+    color: var(--text-color); /* Use standard text color instead of accent */
     font-size: 2.5rem;
 }
+
 .page-header p {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
     color: #777;
+    margin-bottom: 0;
 }
+
 .back-link {
     display: inline-block;
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
     text-decoration: none;
+    color: var(--accent-color);
 }
 
-/* 2. Letter List (Card Style from Original Screenshot)
+/* 2. Letter List
 /* ---------------------------------- */
 .letter-list {
     max-width: 700px;
     margin: 0 auto;
 }
+
 .letter-item {
-    margin-bottom: 2rem; /* Space between cards */
+    margin-bottom: 3rem;
 }
+
 .letter-link {
     display: block;
     padding: 2rem;
-    border: 1px solid var(--letter-border-color); /* Default light grey border */
+    border: 1px solid var(--letter-border-color);
     border-radius: 3px;
     text-decoration: none;
     color: var(--text-color);
     transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
+
 .letter-link:hover {
-    border-color: var(--accent-color); /* Burgundy border on hover */
-    transform: translateY(-5px);      /* Move up on hover */
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
 }
-.letter-link header, .letter-link p {
-    text-align: left;
-}
+
 .letter-item-date {
+    font-family: var(--font-body);
     font-size: 0.85rem;
     color: #888;
-    margin-bottom: 0.25rem;
+    margin: 0;
 }
+
 .letter-item-title {
+    font-family: var(--font-heading);
     font-size: 1.75rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    margin: 0.25rem 0 1rem 0;
+    color: var(--accent-color);
 }
+
 .letter-item-excerpt {
     font-size: 1rem;
     line-height: 1.6;
@@ -67,42 +78,53 @@
 
 /* 3. Letter Detail Page
 /* ---------------------------------- */
+
 .letter-header {
     text-align: left;
     margin-bottom: 2rem;
 }
+
 .letter-content {
-    max-width: 700px;
+    max-width: 700px; /* Same as the main container for consistency */
     margin: 0 auto;
 }
+
 .letter-title {
     font-size: 2.75rem;
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
+
 .letter-meta {
+    font-family: var(--font-body);
     color: #888;
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--letter-border-color);
     padding-bottom: 2rem;
 }
+
 .letter-body {
-    text-align: left;
+    /* This is where the magic happens for readability */
+    text-align: left; /* Override the 'text-align: center' from .container */
 }
+
 .letter-body p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 2rem;
+    font-size: 1.1rem; /* Slightly larger font for comfortable reading */
+    line-height: 1.8; /* More generous line height */
+    margin-bottom: 2rem; /* Spacing between paragraphs */
 }
+
+/* Style the signature block to be more compact */
 .letter-signature p {
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
+    margin-bottom: 0.25rem; /* Drastically reduce the space between signature lines */
+    line-height: 1.4;      /* Bring the lines closer together vertically */
 }
 
 /* 4. Letter CTA Section
 /* ---------------------------------- */
 .letter-cta-section {
-    margin-top: 5rem;
-    padding-top: 4rem;
-    border-top: 1px solid var(--letter-border-color);
+    margin-top: 5rem; /* Creates space above this section, separating it from the letter content */
+    padding-top: 4rem; /* Creates space below the border line, before the title */
+    border-top: 1px solid var(--letter-border-color); /* A subtle separator line */
 }

@@ -83,6 +83,7 @@ strong {
     max-width: 700px; /* Perfect width for a comfortable, book-like reading line */
     margin: 0 auto;
     padding: 0 1.5rem;
+    text-align: center;
 }
 
 .content-section, .hero-section, .cta-end-section {
