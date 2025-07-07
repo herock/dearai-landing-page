@@ -1,36 +1,25 @@
 export async function onRequest(context) {
-    // 从上下文中解构所需的对象
-    const { env, params } = context;
-    const bucket = env.ARTICLES_BUCKET;
+    try {
+      const { env, params, request } = context;
   
-    // 1. 构造 R2 中的对象键
-    // params.path 是一个数组，例如 ['letters', 'some-article.html']
-    let key = 'alex/' + params.path.join('/');
+      // 准备一个对象来存放我们要检查的所有调试信息
+      const debugInfo = {
+        message: "DearAI Pages Function - Debugging Session",
+        request_url: request.url,
+        did_env_exist: typeof env !== 'undefined',
+        env_keys: env ? Object.keys(env) : "env object does not exist.",
+        is_articles_bucket_defined: env ? (typeof env.ARTICLES_BUCKET !== 'undefined') : "N/A",
+        articles_bucket_type: env ? typeof env.ARTICLES_BUCKET : "N/A",
+        params_path_value: params.path,
+      };
   
-    // 2. 如果请求的是目录 (如 /alex/ 或 /alex/letters/)，
-    //    则默认提供该目录下的 index.html。
-    //    注意：我们不再检查路径是否包含点。
-    if (key.endsWith('/')) {
-      key += 'index.html';
+      // 将调试信息格式化为 JSON 字符串并返回
+      return new Response(JSON.stringify(debugInfo, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+    } catch (e) {
+      // 如果连上面的调试代码都出错了，就把错误信息返回
+      return new Response(e.stack || e.toString(), { status: 500 });
     }
-  
-    // 3. 从 R2 获取对象
-    const object = await bucket.get(key);
-  
-    // 4. 如果对象未找到，返回一个明确的 404 响应
-    if (object === null) {
-      // 我们可以返回一个简单的文本 404
-      return new Response(`Object Not Found: ${key}`, { status: 404 });
-      // 或者，如果你有一个自定义的静态 404.html 页面在你的项目根目录，
-      // 可以用 context.next() 去获取它，但直接返回更简单可靠。
-    }
-  
-    // 5. 成功找到对象，构建并返回响应
-    const headers = new Headers();
-    object.writeHttpMetadata(headers);
-    headers.set('etag', object.httpEtag);
-  
-    return new Response(object.body, {
-      headers,
-    });
   }
