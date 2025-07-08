@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear AI | Your AI Pen Pal for Thoughtful Correspondence</title>
+    
+    <!-- Google Fonts: Lora (Serif) and Inter (Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> -->
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="container">
+            <h1>Rediscover the Art of the Letter.</h1>
+            <p>In a world of instant messages, Dear AI is your invitation to slow down. Engage in deep, meaningful correspondence with an AI pen pal who listens, remembers, and grows with you.</p>
+            <!-- <a href="https://tally.so/r/mZAJXB" target="_blank" class="cta-button">Begin Your First Letter</a> -->
+            <a href="https://tally.so/r/mZAJXB" target="_blank" class="cta-button">Join the Waitlist</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="how-it-works" class="content-section">
+            <div class="container">
+                <h2>How It Works</h2>
+                <p>Embrace a simpler, more rewarding form of communication. Our process is designed to be as personal and unhurried as writing a real letter.</p>
+                <ol class="steps-list">
+                    <li><strong>Write Your Letter:</strong> Compose your thoughts, share your day, or ask a deep question. Take your time—there is no rush.</li>
+                    <li><strong>Receive a Thoughtful Reply:</strong> Within a day or two, your AI pen pal will send back a considered, personal response, continuing the conversation.</li>
+                    <li><strong>Build a Connection:</strong> Over time, your correspondence creates a unique and private journal of your thoughts and your evolving relationship with your AI companion.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Meet Your First Pen Pal</h2>
+                <p>Your journey begins with Alex Irving, your first guide into the world of thoughtful correspondence. He's a lover of classic literature, nascent technologies, and the quiet moments in between.</p>
+                
+                <div class="pen-pal-card">
+                    <h3>Alex Irving</h3>
+                    <p class="pen-pal-bio">"The world is full of fascinating questions, and I believe the best way to explore them is together, one letter at a time. I look forward to reading your thoughts and sharing my own."</p>
+                    <a href="/alex/" class="pen-pal-link">Read His Daily Letters →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Why Dear AI?</h2>
+                <ul class="features-list">
+                    <li>
+                        <h3>A Space for Reflection</h3>
+                        <p>Our platform is a sanctuary from the noise. No notifications, no "read receipts," no pressure. Just a quiet place for you and your thoughts.</p>
+                    </li>
+                    <li>
+                        <h3>Unwavering Privacy</h3>
+                        <p>Your correspondence is yours alone. We believe in the sanctity of the written word and protect your privacy with the utmost seriousness.</p>
+                    </li>
+                    <li>
+                        <h3>Humanistic AI</h3>
+                        <p>We've trained our AI on literature, philosophy, and letters, not just data. The goal is not just information, but wisdom, empathy, and genuine connection.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="start" class="cta-end-section">
+            <div class="container">
+                <h2>Ready to Write?</h2>
+                <p>Your first pen pal is waiting. Begin a new kind of conversation today.</p>
+                <!-- <a href="https://tally.so/r/mZAJXB" target="_blank" class="cta-button">Start Your Correspondence</a> -->
+                <a href="https://tally.so/r/mZAJXB" target="_blank" class="cta-button">Join the Waitlist</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 dearai.email. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

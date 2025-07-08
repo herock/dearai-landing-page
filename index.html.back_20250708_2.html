@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dear'y - Your Private Journal App</title>
+    <title>Dearai - 你的私人日记 App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
@@ -38,12 +38,13 @@
         .nav-cta a { padding: 10px 20px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: var(--border-radius); text-decoration: none; font-weight: 500; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .nav-cta a:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2); }
         
+        /* --- MODIFICATION: Language Switcher Styles --- */
         .language-switcher { position: relative; }
         .language-switcher-button { background: none; border: 1px solid rgba(255,255,255,0.2); color: var(--text-secondary-color); padding: 8px 12px; border-radius: var(--border-radius); cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: var(--font-family); font-size: 0.9rem; transition: background-color 0.2s; }
         .language-switcher-button:hover { background-color: rgba(255,255,255,0.05); }
         .language-switcher-button svg { width: 16px; height: 16px; fill: currentColor; }
         .language-dropdown {
-            display: none;
+            display: none; /* Controlled by JS now */
             position: absolute; top: calc(100% + 10px); right: 0;
             background-color: var(--surface-color); border: 1px solid rgba(255,255,255,0.1);
             border-radius: var(--border-radius); padding: 5px; min-width: 120px;
@@ -51,6 +52,7 @@
             opacity: 0; transform: translateY(-10px);
             transition: opacity 0.2s ease, transform 0.2s ease;
         }
+        /* MODIFICATION: New class 'active' to show the dropdown */
         .language-switcher.active .language-dropdown {
             display: block;
             opacity: 1;
@@ -118,96 +120,26 @@
         .footer-links a { color: var(--text-secondary-color); text-decoration: none; transition: color 0.3s; }
         .footer-links a:hover { color: var(--text-color); }
         .copyright { color: var(--text-secondary-color); font-size: 0.9rem; }
-        /* --- Mobile Navigation Styles --- */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .mobile-nav.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-nav-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .mobile-nav-content {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 1.8rem;
-            font-weight: 500;
-            display: block;
-            padding: 10px 0;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .mobile-language-switcher {
-            margin-top: 20px;
-        }
-
-        .mobile-nav-cta {
-            margin-top: 20px;
-        }
         @media (max-width: 992px) { .hero-content { flex-direction: column; text-align: center; } .hero-text { max-width: 600px; } .hero-image-wrapper { margin-top: 40px; max-width: 320px; max-height: 380px; } .hero h1 { font-size: 2.8rem; } }
-        @media (max-width: 768px) { .nav-menu { display: none; } .mobile-nav-toggle { display: block; } section { padding: 60px 0; } .section-heading h2 { font-size: 2rem; } .steps-container { flex-direction: column; } .hero { padding-top: 120px; } .hero h1 { font-size: 2.5rem; } .hero p { font-size: 1rem; } }
+        @media (max-width: 768px) { .nav-links, .nav-cta, .language-switcher { display: none; } .mobile-nav-toggle { display: block; } section { padding: 60px 0; } .section-heading h2 { font-size: 2rem; } .steps-container { flex-direction: column; } .hero { padding-top: 120px; } .hero h1 { font-size: 2.5rem; } .hero p { font-size: 1rem; } }
     </style>
 </head>
 <body>
 
     <header class="header">
         <div class="container navbar">
-            <a href="#" class="logo" data-i18n-key="logoText">Deary<span></span></a>
+            <a href="#" class="logo">Dearai<span></span></a>
             <div class="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="#features" data-i18n-key="navFeatures">Features</a></li>
-                    <li><a href="#how-it-works" data-i18n-key="navHowItWorks">How It Works</a></li>
-                    <li><a href="#" data-i18n-key="navPricing">Pricing</a></li>
+                    <li><a href="#features" data-i18n-key="navFeatures">核心功能</a></li>
+                    <li><a href="#how-it-works" data-i18n-key="navHowItWorks">如何工作</a></li>
+                    <li><a href="#" data-i18n-key="navPricing">定价</a></li>
                 </ul>
                 
                 <div class="language-switcher">
                     <button class="language-switcher-button">
                         <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                        <span id="current-lang">English</span>
+                        <span id="current-lang">中文</span>
                     </button>
                     <div class="language-dropdown">
                         <a href="#" data-lang="ja">日本語</a>
@@ -217,64 +149,34 @@
                 </div>
 
                 <div class="nav-cta">
-                    <a href="#" data-i18n-key="navStart">Get Started</a>
+                    <a href="#" data-i18n-key="navStart">立即开始</a>
                 </div>
             </div>
             <button class="mobile-nav-toggle">☰</button>
         </div>
     </header>
 
-    <!-- START: Mobile Navigation HTML -->
-    <div class="mobile-nav">
-        <button class="mobile-nav-close">×</button>
-        <div class="mobile-nav-content">
-            <ul class="mobile-nav-links">
-                <li><a href="#features" data-i18n-key="navFeatures">Features</a></li>
-                <li><a href="#how-it-works" data-i18n-key="navHowItWorks">How It Works</a></li>
-                <li><a href="#" data-i18n-key="navPricing">Pricing</a></li>
-            </ul>
-
-            <!-- We'll reuse the language switcher structure here -->
-            <div class="language-switcher mobile-language-switcher">
-                <button class="language-switcher-button">
-                    <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>
-                    <span id="current-lang-mobile">English</span>
-                </button>
-                <div class="language-dropdown">
-                    <a href="#" data-lang="ja">日本語</a>
-                    <a href="#" data-lang="en">English</a>
-                    <a href="#" data-lang="zh">中文</a>
-                </div>
-            </div>
-            
-            <div class="mobile-nav-cta">
-                <a href="#" data-i18n-key="navStart" class="cta-button">Get Started</a>
-            </div>
-        </div>
-    </div>
-    <!-- END: Mobile Navigation HTML -->
-
     <main>
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <div class="hero-tagline fade-in" data-i18n-key="heroTagline">Your Private Journal App</div>
-                        <h1 class="fade-in" style="transition-delay: 0.2s;" data-i18n-key="heroTitle">A truly understanding<br>private space for your thoughts</h1>
-                        <p class="fade-in" style="transition-delay: 0.4s;" data-i18n-key="heroDescription">Here, you can safely record your thoughts and sort through emotions. Through intelligent guidance, we help you turn daily moments into profound self-awareness. Download the app and start your journey of the mind.</p>
-                        <a href="#" class="cta-button fade-in" style="transition-delay: 0.6s;" data-i18n-key="heroCTA">Download App, Start for Free →</a>
+                        <div class="hero-tagline fade-in" data-i18n-key="heroTagline">你的私人日记 App</div>
+                        <h1 class="fade-in" style="transition-delay: 0.2s;" data-i18n-key="heroTitle">一个真正懂你的<br>私密对话空间</h1>
+                        <p class="fade-in" style="transition-delay: 0.4s;" data-i18n-key="heroDescription">在这里，你可以安全地记录思绪、梳理情感。我们通过智能引导，帮你将日常点滴转化为深刻的自我认知。下载 App，开启属于你的心灵之旅。</p>
+                        <a href="#" class="cta-button fade-in" style="transition-delay: 0.6s;" data-i18n-key="heroCTA">下载 App，免费开始 →</a>
                     </div>
                     <div class="hero-image-wrapper fade-in" style="transition-delay: 0.3s;">
                         <div class="phone-mockup">
                             <div class="phone-screen">
                                 <div class="app-header">
-                                    <h4 data-i18n-key="mockupPartner">Your Companion</h4>
-                                    <p data-i18n-key="mockupListening">Listening...</p>
+                                    <h4 data-i18n-key="mockupPartner">你的伙伴</h4>
+                                    <p data-i18n-key="mockupListening">正在倾听...</p>
                                 </div>
                                 <div class="chat-area">
-                                    <div class="chat-bubble partner" data-i18n-key="mockupChat1">How was your day? Anything you want to talk about?</div>
-                                    <div class="chat-bubble you" data-i18n-key="mockupChat2">Feeling a bit complicated today...</div>
-                                    <div class="chat-bubble partner" data-i18n-key="mockupChat3">That's okay, take your time. I'm here.</div>
+                                    <div class="chat-bubble partner" data-i18n-key="mockupChat1">今天过得怎么样？有什么想聊聊的吗？</div>
+                                    <div class="chat-bubble you" data-i18n-key="mockupChat2">今天心情有点复杂...</div>
+                                    <div class="chat-bubble partner" data-i18n-key="mockupChat3">没关系，慢慢说，我在这里。</div>
                                 </div>
                             </div>
                         </div>
@@ -286,50 +188,51 @@
         <section id="features">
             <div class="container">
                 <div class="section-heading fade-in">
-                    <h2 data-i18n-key="featuresTitle">A Journaling Experience Designed for You</h2>
-                    <p data-i18n-key="featuresSubtitle">We believe that recording your life should be an easy and enjoyable thing.</p>
+                    <h2 data-i18n-key="featuresTitle">专为你设计的日记体验</h2>
+                    <p data-i18n-key="featuresSubtitle">我们相信，记录生活应该是一件轻松而愉快的事。</p>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card fade-in">
                         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9.25 2.75a.75.75 0 0 0-1.5 0v1.504a23.16 23.16 0 0 0-1.597.228.75.75 0 0 0-.435 1.34l.002.002 1.39 1.043a.75.75 0 0 0 .96-.062l.061-.092a8.553 8.553 0 0 1 2.37-2.37l.092-.06a.75.75 0 0 0 .062-.961l-1.043-1.39-.002-.003a.75.75 0 0 0-1.34-.435A23.16 23.16 0 0 0 9.25 4.254V2.75Zm6.347 2.222a.75.75 0 0 0-1.042-.23l-1.39 1.043a.75.75 0 0 0-.062.96l.091.06a8.553 8.553 0 0 1 2.37 2.37l.06.092a.75.75 0 0 0 .96.062l1.043-1.39.003-.002a.75.75 0 0 0-.23-1.042 23.16 23.16 0 0 0-1.801-.527ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM5.027 8.403a.75.75 0 0 0-1.34.435l.002.003 1.043 1.39a.75.75 0 0 0 .96.062l.06-.091a8.553 8.553 0 0 1 2.37-2.37l.092-.06a.75.75 0 0 0 .062-.961l-1.39-1.043-.002-.002a.75.75 0 0 0-.813-.23Zm13.946 0a.75.75 0 0 0-.814.23l-1.39 1.043a.75.75 0 0 0 .062.961l.091.06a8.553 8.553 0 0 1 2.37 2.37l.06.091a.75.75 0 0 0 .96.062l1.043-1.39.003-.003a.75.75 0 0 0-.435-1.34 23.16 23.16 0 0 0-1.801-.527Z"/></svg></div>
-                        <h3 data-i18n-key="feature1Title">Smart Prompts</h3>
-                        <p data-i18n-key="feature1Desc">Don't know what to write? We provide personalized questions and inspiration based on your mood and past entries to help you get started easily.</p>
+                        <h3 data-i18n-key="feature1Title">智能引导</h3>
+                        <p data-i18n-key="feature1Desc">不知道写什么？我们会根据你的心情和过往记录，提供个性化的问题和灵感，帮你轻松开始。</p>
                     </div>
                     <div class="feature-card fade-in" style="transition-delay: 0.2s;">
                         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 0 0-.756 0L3.366 6.335A.75.75 0 0 0 3 6.963v10.074c0 .354.227.67.558.746l8.259 1.943a.75.75 0 0 0 .366 0l8.259-1.943a.75.75 0 0 0 .558-.746V6.963a.75.75 0 0 0-.366-.628L12.378 1.602ZM12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z" /><path d="M12 17.25a5.25 5.25 0 1 0 0-10.5 5.25 5.25 0 0 0 0 10.5Z" /></svg></div>
-                        <h3 data-i18n-key="feature2Title">Intelligent Review</h3>
-                        <p data-i18n-key="feature2Desc">We help you summarize your weekly and monthly emotional trends and key events, generating exclusive reports for you to discover a new side of yourself.</p>
+                        <h3 data-i18n-key="feature2Title">智能回顾</h3>
+                        <p data-i18n-key="feature2Desc">我们会帮你总结每周、每月的情绪变化和关键事件，生成专属报告，带你发现不一样的自己。</p>
                     </div>
                     <div class="feature-card fade-in" style="transition-delay: 0.4s;">
                         <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" /></svg></div>
-                        <h3 data-i18n-key="feature3Title">Absolute Privacy</h3>
-                        <p data-i18n-key="feature3Desc">Your thoughts belong only to you. We use bank-level encryption to ensure that no one but you can ever see your journal.</p>
+                        <h3 data-i18n-key="feature3Title">绝对隐私</h3>
+                        <p data-i18n-key="feature3Desc">你的心事只属于你。我们采用银行级的加密技术，确保除了你自己，任何人都无法窥探你的日记。</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- RESTORED CONTENT STARTS HERE -->
         <section id="how-it-works">
              <div class="container">
                 <div class="section-heading fade-in">
-                    <h2 data-i18n-key="howitworksTitle">Three Steps to Start a Heartfelt Conversation</h2>
-                    <p data-i18n-key="howitworksSubtitle">We make complex technology feel as simple and natural as breathing.</p>
+                    <h2 data-i18n-key="howitworksTitle">三步，开启心灵对话</h2>
+                    <p data-i18n-key="howitworksSubtitle">我们把复杂的技术变得像呼吸一样简单自然。</p>
                 </div>
                 <div class="steps-container">
                     <div class="step fade-in">
                         <div class="step-number">1</div>
-                        <h3 data-i18n-key="step1Title">Start a Conversation</h3>
-                        <p data-i18n-key="step1Desc">Just like messaging a friend, write down your thoughts, feelings, or daily log anytime, anywhere.</p>
+                        <h3 data-i18n-key="step1Title">开启对话</h3>
+                        <p data-i18n-key="step1Desc">像给朋友发消息一样，随时随地写下你的想法、感受或今日流水账。</p>
                     </div>
                     <div class="step fade-in" style="transition-delay: 0.2s;">
                         <div class="step-number">2</div>
-                        <h3 data-i18n-key="step2Title">Smart Organization</h3>
-                        <p data-i18n-key="step2Desc">The system automatically organizes your words, extracts key information, and applies suitable tags.</p>
+                        <h3 data-i18n-key="step2Title">智能整理</h3>
+                        <p data-i18n-key="step2Desc">系统会自动为你组织语言，提取关键信息，并打上合适的标签。</p>
                     </div>
                     <div class="step fade-in" style="transition-delay: 0.4s;">
                         <div class="step-number">3</div>
-                        <h3 data-i18n-key="step3Title">Generate Your Journal</h3>
-                        <p data-i18n-key="step3Desc">Your fragmented thoughts will be compiled into beautifully formatted and memorable journal entries.</p>
+                        <h3 data-i18n-key="step3Title">生成专属日记</h3>
+                        <p data-i18n-key="step3Desc">你的碎片化思绪，将汇集成一篇篇排版精美、充满回忆的日记。</p>
                     </div>
                 </div>
             </div>
@@ -338,37 +241,37 @@
         <section id="testimonials">
             <div class="container">
                 <div class="section-heading fade-in">
-                    <h2 data-i18n-key="testimonialsTitle">Hear Their Stories</h2>
-                    <p data-i18n-key="testimonialsSubtitle">See how Deary has changed the way they record their lives.</p>
+                    <h2 data-i18n-key="testimonialsTitle">听听他们的故事</h2>
+                    <p data-i18n-key="testimonialsSubtitle">看看 Dearai 如何改变了他们的生活记录方式。</p>
                 </div>
                 <div class="testimonials-grid">
                     <div class="testimonial-card fade-in">
-                        <p data-i18n-key="testimonial1Quote">"I always wanted to keep a journal but could never stick with it. This app is like a gentle friend, reminding me daily, which helped me build a great habit. Looking back now, it's full of memories."</p>
+                        <p data-i18n-key="testimonial1Quote">"我一直想写日记，但总是坚持不下来。这款 App 就像一个温柔的朋友，每天提醒我，让我养成了记录的好习惯。现在回头看，满满都是回忆。"</p>
                         <div class="testimonial-author">
                             <div class="avatar-silhouette"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg></div>
                             <div class="author-info">
-                                <h4 data-i18n-key="testimonial1Author">Yue Lin</h4>
-                                <span data-i18n-key="testimonial1Detail">Designer, 3 months user</span>
+                                <h4 data-i18n-key="testimonial1Author">林悦</h4>
+                                <span data-i18n-key="testimonial1Detail">设计师，使用 3 个月</span>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card fade-in" style="transition-delay: 0.2s;">
-                        <p data-i18n-key="testimonial2Quote">"What impressed me most is the privacy. I know my words are absolutely safe here, which allows me to speak without reservation. Its summary reports often bring pleasant surprises."</p>
+                        <p data-i18n-key="testimonial2Quote">"最打动我的是隐私保护。我知道在这里说的话是绝对安全的，这让我可以毫无保留地倾诉。它的总结报告也经常给我带来惊喜。"</p>
                         <div class="testimonial-author">
                             <div class="avatar-silhouette"><svg viewBox="0 0 24 24"><path d="M12,12A4,4,0,1,0,8,8,4,4,0,0,0,12,12Zm0,2c-2.67,0-8,1.34-8,4v2H20V18C20,15.34,14.67,14,12,14Z"/></svg></div>
                             <div class="author-info">
-                                <h4 data-i18n-key="testimonial2Author">Mo Chen</h4>
-                                <span data-i18n-key="testimonial2Detail">Programmer, 6 months user</span>
+                                <h4 data-i18n-key="testimonial2Author">陈默</h4>
+                                <span data-i18n-key="testimonial2Detail">程序员，使用 6 个月</span>
                             </div>
                         </div>
                     </div>
                      <div class="testimonial-card fade-in" style="transition-delay: 0.4s;">
-                        <p data-i18n-key="testimonial3Quote">"Work is too busy, and many ideas are fleeting. Now I just record them with my voice, and it perfectly transcribes and saves them. It's not just a journal, it's my inspiration bank!"</p>
+                        <p data-i18n-key="testimonial3Quote">"工作太忙，很多灵感一闪而过。现在我直接用语音记录，它能完美地转成文字并保存下来。这不仅是日记，更是我的灵感库！"</p>
                         <div class="testimonial-author">
                             <div class="avatar-silhouette"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg></div>
                             <div class="author-info">
-                                <h4 data-i18n-key="testimonial3Author">Qing Wang</h4>
-                                <span data-i18n-key="testimonial3Detail">Marketer, 1 month user</span>
+                                <h4 data-i18n-key="testimonial3Author">王晴</h4>
+                                <span data-i18n-key="testimonial3Detail">市场经理，使用 1 个月</span>
                             </div>
                         </div>
                     </div>
@@ -379,34 +282,35 @@
         <section id="final-cta-section">
             <div class="container">
                 <div class="final-cta fade-in">
-                    <h2 data-i18n-key="finalCtaTitle">Ready to Start Recording Your Life?</h2>
-                    <p data-i18n-key="finalCtaSubtitle">Download Deary now and turn every ordinary day into a story worth treasuring. It all starts for free.</p>
-                    <a href="#" class="cta-button" data-i18n-key="finalCtaButton">Start My Journal Journey Now</a>
+                    <h2 data-i18n-key="finalCtaTitle">准备好开始记录你的生活了吗？</h2>
+                    <p data-i18n-key="finalCtaSubtitle">立即下载 Dearai，将每一个平凡的日子，都变成值得珍藏的故事。一切从免费开始。</p>
+                    <a href="#" class="cta-button" data-i18n-key="finalCtaButton">立即开启我的日记之旅</a>
                 </div>
             </div>
         </section>
+        <!-- RESTORED CONTENT ENDS HERE -->
     </main>
 
     <footer class="footer">
         <div class="container footer-content">
+            <!-- <a href="#" class="footer-logo">Dearai<span></span></a> -->
             <ul class="footer-links">
-                <li><a href="#" data-i18n-key="footerAbout">About Us</a></li>
-                <li><a href="#" data-i18n-key="footerPrivacy">Privacy Policy</a></li>
-                <li><a href="#" data-i18n-key="footerTerms">Terms of Service</a></li>
-                <li><a href="#" data-i18n-key="footerContact">Contact Us</a></li>
+                <li><a href="#" data-i18n-key="footerAbout">关于我们</a></li>
+                <li><a href="#" data-i18n-key="footerPrivacy">隐私政策</a></li>
+                <li><a href="#" data-i18n-key="footerTerms">服务条款</a></li>
+                <li><a href="#" data-i18n-key="footerContact">联系我们</a></li>
             </ul>
-            <p class="copyright" data-i18n-key="copyright">&copy; 2024 Dear'y. All rights reserved.</p>
+            <p class="copyright" data-i18n-key="copyright">&copy; 2024 Dearai. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         // --- Internationalization (i18n) Logic ---
         const translations = {
-            'ja': { 'pageTitle': 'Deary - あなたのプライベート日記アプリ','logoText': 'ディアリー', 'navFeatures': '主な機能', 'navHowItWorks': '使い方', 'navPricing': '価格', 'navStart': '今すぐ始める', 'currentLang': '日本語', 'heroTagline': 'あなたのプライベート日記アプリ', 'heroTitle': '本当の自分と向き合う<br>プライベートな空間', 'heroDescription': 'ここでは、安心して思考を記録し、感情を整理できます。インテリジェントなガイドで、日々の出来事を深い自己認識へと変えるお手伝いをします。アプリをダウンロードして、あなたの心の旅を始めましょう。', 'heroCTA': 'アプリをダウンロード、無料で開始 →', 'mockupPartner': 'あなたのパートナー', 'mockupListening': '聞いています...', 'mockupChat1': '今日はどんな一日でしたか？何か話したいことはありますか？', 'mockupChat2': '今日は少し複雑な気分で...', 'mockupChat3': '大丈夫ですよ、ゆっくり話してください。私はここにいます。', 'featuresTitle': 'あなたのために設計された日記体験', 'featuresSubtitle': '私たちは、人生を記録することが、手軽で楽しいことであるべきだと信じています。', 'feature1Title': 'スマートな質問', 'feature1Desc': '書くことに迷っても大丈夫。あなたの気分や記録に合わせた的確な質問で、自然な言葉を引き出します。', 'feature2Title': 'インテリジェントな振り返り', 'feature2Desc': '週や月ごとの感情の変化や出来事をレポートに。自分では気づかなかった、新しいあなたを発見するきっかけになります。', 'feature3Title': '絶対的なプライバシー', 'feature3Desc': 'あなたの心の内は、最高レベルの暗号化で保護されます。あなた自身以外、誰も読むことはできません。', 'howitworksTitle': '3ステップで始める、心との対話', 'howitworksSubtitle': '私たちは複雑な技術を、呼吸のようにシンプルで自然なものにします。', 'step1Title': '対話を始める', 'step1Desc': '友人にメッセージを送るように、いつでもどこでもあなたの考えや感情、今日の出来事を書き留めます。', 'step2Title': 'スマート整理', 'step2Desc': 'システムが自動的に言葉を整理し、重要な情報を抽出し、適切なタグを付けます。', 'step3Title': '専用の日記を生成', 'step3Desc': 'あなたの断片的な思考が、美しく整理された思い出深い日記のエントリーにまとめられます。', 'testimonialsTitle': '彼らのストーリーを聞く', 'testimonialsSubtitle': 'ディアリーが彼らの生活記録の方法をどのように変えたかをご覧ください。', 'testimonial1Quote': '「日記が続かなかった私が、このアプリのおかげで書く習慣ができました。優しい友人のように毎日リマインドしてくれます。今では大切な思い出でいっぱいです。」', 'testimonial1Author': '高橋　優衣', 'testimonial1Detail': 'デザイナー、3ヶ月利用', 'testimonial2Quote': '「プライバシーが守られている安心感から、何でも素直に書けます。定期的に届く要約レポートが、自分を振り返る良いきっかけになっています。」', 'testimonial2Author': '田中　健太', 'testimonial2Detail': 'プログラマー、6ヶ月利用', 'testimonial3Quote': '「忙しい時のひらめきを音声ですぐ記録できるのが本当に便利です。自動でテキスト化されるので、日記だけでなくアイデアバンクとしても重宝しています。」', 'testimonial3Author': '佐藤　美咲', 'testimonial3Detail': 'マーケター、1ヶ月利用', 'finalCtaTitle': 'あなたの人生の記録を始める準備はできましたか？', 'finalCtaSubtitle': '今すぐディアリーをダウンロードして、すべての日を大切な物語に変えましょう。すべては無料から始まります。', 'finalCtaButton': '私の日記の旅を今すぐ始める', 'footerAbout': '私たちについて', 'footerPrivacy': 'プライバシーポリシー', 'footerTerms': '利用規約', 'footerContact': 'お問い合わせ', 'copyright': '© 2024 ディアリー. 全著作権所有。'},
-            'en': { 'pageTitle': 'Deary - Your Private Journal App','logoText': 'Deary', 'navFeatures': 'Features', 'navHowItWorks': 'How It Works', 'navPricing': 'Pricing', 'navStart': 'Get Started', 'currentLang': 'English', 'heroTagline': 'Your Private Journal App', 'heroTitle': 'A truly understanding<br>private space for your thoughts', 'heroDescription': 'Here, you can safely record your thoughts and sort through emotions. Through intelligent guidance, we help you turn daily moments into profound self-awareness. Download the app and start your journey of the mind.', 'heroCTA': 'Download App, Start for Free →', 'mockupPartner': 'Your Companion', 'mockupListening': 'Listening...', 'mockupChat1': 'How was your day? Anything you want to talk about?', 'mockupChat2': 'Feeling a bit complicated today...', 'mockupChat3': "That's okay, take your time. I'm here.", 'featuresTitle': 'A Journaling Experience Designed for You', 'featuresSubtitle': 'We believe that recording your life should be an easy and enjoyable thing.', 'feature1Title': 'Smart Prompts', 'feature1Desc': "Don't know what to write? We provide personalized questions and inspiration based on your mood and past entries to help you get started easily.", 'feature2Title': 'Intelligent Review', 'feature2Desc': 'We help you summarize your weekly and monthly emotional trends and key events, generating exclusive reports for you to discover a new side of yourself.', 'feature3Title': 'Absolute Privacy', 'feature3Desc': 'Your thoughts belong only to you. We use bank-level encryption to ensure that no one but you can ever see your journal.', 'howitworksTitle': 'Three Steps to Start a Heartfelt Conversation', 'howitworksSubtitle': 'We make complex technology feel as simple and natural as breathing.', 'step1Title': 'Start a Conversation', 'step1Desc': 'Just like messaging a friend, write down your thoughts, feelings, or daily log anytime, anywhere.', 'step2Title': 'Smart Organization', 'step2Desc': 'The system automatically organizes your words, extracts key information, and applies suitable tags.', 'step3Title': 'Generate Your Journal', 'step3Desc': 'Your fragmented thoughts will be compiled into beautifully formatted and memorable journal entries.', 'testimonialsTitle': 'Hear Their Stories', 'testimonialsSubtitle': 'See how Deary has changed the way they record their lives.', 'testimonial1Quote': '"I always wanted to keep a journal but could never stick with it. This app is like a gentle friend, reminding me daily, which helped me build a great habit. Looking back now, it\'s full of memories."', 'testimonial1Author': 'Chloe Davis', 'testimonial1Detail': 'Designer, 3 months user', 'testimonial2Quote': '"What impressed me most is the privacy. I know my words are absolutely safe here, which allows me to speak without reservation. Its summary reports often bring pleasant surprises."', 'testimonial2Author': 'Alex Miller', 'testimonial2Detail': 'Programmer, 6 months user', 'testimonial3Quote': '"Work is too busy, and many ideas are fleeting. Now I just record them with my voice, and it perfectly transcribes and saves them. It\'s not just a journal, it\'s my inspiration bank!"', 'testimonial3Author': 'Sarah Jones', 'testimonial3Detail': 'Marketer, 1 month user', 'finalCtaTitle': 'Ready to Start Recording Your Life?', 'finalCtaSubtitle': 'Download Deary now and turn every ordinary day into a story worth treasuring. It all starts for free.', 'finalCtaButton': 'Start My Journal Journey Now', 'footerAbout': 'About Us', 'footerPrivacy': 'Privacy Policy', 'footerTerms': 'Terms of Service', 'footerContact': 'Contact Us', 'copyright': '© 2024 Deary. All rights reserved.'},
+            'ja': { /* ... Japanese Translations ... */ 'pageTitle': 'Dearai - あなたのプライベート日記アプリ', 'navFeatures': '主な機能', 'navHowItWorks': '使い方', 'navPricing': '価格', 'navStart': '今すぐ始める', 'currentLang': '日本語', 'heroTagline': 'あなたのプライベート日記アプリ', 'heroTitle': '本当の自分と向き合う<br>プライベートな空間', 'heroDescription': 'ここでは、安心して思考を記録し、感情を整理できます。インテリジェントなガイドで、日々の出来事を深い自己認識へと変えるお手伝いをします。アプリをダウンロードして、あなたの心の旅を始めましょう。', 'heroCTA': 'アプリをダウンロード、無料で開始 →', 'mockupPartner': 'あなたのパートナー', 'mockupListening': '聞いています...', 'mockupChat1': '今日はどんな一日でしたか？何か話したいことはありますか？', 'mockupChat2': '今日は少し複雑な気分で...', 'mockupChat3': '大丈夫ですよ、ゆっくり話してください。私はここにいます。', 'featuresTitle': 'あなたのために設計された日記体験', 'featuresSubtitle': '私たちは、人生を記録することが、手軽で楽しいことであるべきだと信じています。', 'feature1Title': 'スマートな質問', 'feature1Desc': '書くことに迷っても大丈夫。あなたの気分や記録に合わせた的確な質問で、自然な言葉を引き出します。', 'feature2Title': 'インテリジェントな振り返り', 'feature2Desc': '週や月ごとの感情の変化や出来事をレポートに。自分では気づかなかった、新しいあなたを発見するきっかけになります。', 'feature3Title': '絶対的なプライバシー', 'feature3Desc': 'あなたの心の内は、最高レベルの暗号化で保護されます。あなた自身以外、誰も読むことはできません。', 'howitworksTitle': '3ステップで始める、心との対話', 'howitworksSubtitle': '私たちは複雑な技術を、呼吸のようにシンプルで自然なものにします。', 'step1Title': '対話を始める', 'step1Desc': '友人にメッセージを送るように、いつでもどこでもあなたの考えや感情、今日の出来事を書き留めます。', 'step2Title': 'スマート整理', 'step2Desc': 'システムが自動的に言葉を整理し、重要な情報を抽出し、適切なタグを付けます。', 'step3Title': '専用の日記を生成', 'step3Desc': 'あなたの断片的な思考が、美しく整理された思い出深い日記のエントリーにまとめられます。', 'testimonialsTitle': '彼らのストーリーを聞く', 'testimonialsSubtitle': 'Dearaiが彼らの生活記録の方法をどのように変えたかをご覧ください。', 'testimonial1Quote': '「ずっと日記をつけたいと思っていましたが、続きませんでした。このアプリは優しい友人のように毎日リマインドしてくれて、記録する良い習慣が身につきました。今振り返ると、思い出でいっぱいです。」', 'testimonial1Author': 'リン・エツ', 'testimonial1Detail': 'デザイナー、3ヶ月利用', 'testimonial2Quote': '「最も感銘を受けたのはプライバシー保護です。ここで話すことは絶対に安全だとわかっているので、遠慮なく打ち明けられます。要約レポートも度々嬉しい驚きをもたらしてくれます。」', 'testimonial2Author': 'チェン・モク', 'testimonial2Detail': 'プログラマー、6ヶ月利用', 'testimonial3Quote': '「仕事が忙しく、多くのアイデアが一瞬で消えてしまいます。今は音声で直接記録すると、完璧にテキスト化して保存してくれます。これは日記だけでなく、私のアイデアバンクです！」', 'testimonial3Author': 'オウ・セイ', 'testimonial3Detail': 'マーケター、1ヶ月利用', 'finalCtaTitle': 'あなたの人生の記録を始める準備はできましたか？', 'finalCtaSubtitle': '今すぐDearaiをダウンロードして、すべての日を大切な物語に変えましょう。すべては無料から始まります。', 'finalCtaButton': '私の日記の旅を今すぐ始める', 'footerAbout': '私たちについて', 'footerPrivacy': 'プライバシーポリシー', 'footerTerms': '利用規約', 'footerContact': 'お問い合わせ', 'copyright': '© 2024 Dearai. 全著作権所有。'},
+            'en': { /* ... English Translations ... */ 'pageTitle': 'Dearai - Your Private Journal App', 'navFeatures': 'Features', 'navHowItWorks': 'How It Works', 'navPricing': 'Pricing', 'navStart': 'Get Started', 'currentLang': 'English', 'heroTagline': 'Your Private Journal App', 'heroTitle': 'A truly understanding<br>private space for your thoughts', 'heroDescription': 'Here, you can safely record your thoughts and sort through emotions. Through intelligent guidance, we help you turn daily moments into profound self-awareness. Download the app and start your journey of the mind.', 'heroCTA': 'Download App, Start for Free →', 'mockupPartner': 'Your Companion', 'mockupListening': 'Listening...', 'mockupChat1': 'How was your day? Anything you want to talk about?', 'mockupChat2': 'Feeling a bit complicated today...', 'mockupChat3': "That's okay, take your time. I'm here.", 'featuresTitle': 'A Journaling Experience Designed for You', 'featuresSubtitle': 'We believe that recording your life should be an easy and enjoyable thing.', 'feature1Title': 'Smart Prompts', 'feature1Desc': "Don't know what to write? We provide personalized questions and inspiration based on your mood and past entries to help you get started easily.", 'feature2Title': 'Intelligent Review', 'feature2Desc': 'We help you summarize your weekly and monthly emotional trends and key events, generating exclusive reports for you to discover a new side of yourself.', 'feature3Title': 'Absolute Privacy', 'feature3Desc': 'Your thoughts belong only to you. We use bank-level encryption to ensure that no one but you can ever see your journal.', 'howitworksTitle': 'Three Steps to Start a Heartfelt Conversation', 'howitworksSubtitle': 'We make complex technology feel as simple and natural as breathing.', 'step1Title': 'Start a Conversation', 'step1Desc': 'Just like messaging a friend, write down your thoughts, feelings, or daily log anytime, anywhere.', 'step2Title': 'Smart Organization', 'step2Desc': 'The system automatically organizes your words, extracts key information, and applies suitable tags.', 'step3Title': 'Generate Your Journal', 'step3Desc': 'Your fragmented thoughts will be compiled into beautifully formatted and memorable journal entries.', 'testimonialsTitle': 'Hear Their Stories', 'testimonialsSubtitle': 'See how Dearai has changed the way they record their lives.', 'testimonial1Quote': '"I always wanted to keep a journal but could never stick with it. This app is like a gentle friend, reminding me daily, which helped me build a great habit. Looking back now, it\'s full of memories."', 'testimonial1Author': 'Yue Lin', 'testimonial1Detail': 'Designer, 3 months user', 'testimonial2Quote': '"What impressed me most is the privacy. I know my words are absolutely safe here, which allows me to speak without reservation. Its summary reports often bring pleasant surprises."', 'testimonial2Author': 'Mo Chen', 'testimonial2Detail': 'Programmer, 6 months user', 'testimonial3Quote': '"Work is too busy, and many ideas are fleeting. Now I just record them with my voice, and it perfectly transcribes and saves them. It\'s not just a journal, it\'s my inspiration bank!"', 'testimonial3Author': 'Qing Wang', 'testimonial3Detail': 'Marketing Manager, 1 month user', 'finalCtaTitle': 'Ready to Start Recording Your Life?', 'finalCtaSubtitle': 'Download Dearai now and turn every ordinary day into a story worth treasuring. It all starts for free.', 'finalCtaButton': 'Start My Journal Journey Now', 'footerAbout': 'About Us', 'footerPrivacy': 'Privacy Policy', 'footerTerms': 'Terms of Service', 'footerContact': 'Contact Us', 'copyright': '© 2024 Dearai. All rights reserved.'},
             'zh': {
-                'pageTitle': '亲爱日记 - 你的私人日记 App',
-                'logoText': '亲爱日记',
+                'pageTitle': 'Dearai - 你的私人日记 App',
                 'navFeatures': '核心功能',
                 'navHowItWorks': '如何工作',
                 'navPricing': '定价',
@@ -438,7 +342,7 @@
                 'step3Title': '生成专属日记',
                 'step3Desc': '你的碎片化思绪，将汇集成一篇篇排版精美、充满回忆的日记。',
                 'testimonialsTitle': '听听他们的故事',
-                'testimonialsSubtitle': '看看亲爱日记 如何改变了他们的生活记录方式。',
+                'testimonialsSubtitle': '看看 Dearai 如何改变了他们的生活记录方式。',
                 'testimonial1Quote': '"我一直想写日记，但总是坚持不下来。这款 App 就像一个温柔的朋友，每天提醒我，让我养成了记录的好习惯。现在回头看，满满都是回忆。"',
                 'testimonial1Author': '林悦',
                 'testimonial1Detail': '设计师，使用 3 个月',
@@ -449,13 +353,13 @@
                 'testimonial3Author': '王晴',
                 'testimonial3Detail': '市场经理，使用 1 个月',
                 'finalCtaTitle': '准备好开始记录你的生活了吗？',
-                'finalCtaSubtitle': '立即下载亲爱日记，将每一个平凡的日子，都变成值得珍藏的故事。一切从免费开始。',
+                'finalCtaSubtitle': '立即下载 Dearai，将每一个平凡的日子，都变成值得珍藏的故事。一切从免费开始。',
                 'finalCtaButton': '立即开启我的日记之旅',
                 'footerAbout': '关于我们',
                 'footerPrivacy': '隐私政策',
                 'footerTerms': '服务条款',
                 'footerContact': '联系我们',
-                'copyright': '© 2024 亲爱日记. 保留所有权利。'
+                'copyright': '© 2024 Dearai. 保留所有权利。'
             }
         };
 
@@ -470,11 +374,11 @@
             document.title = translations[lang]['pageTitle'];
             document.documentElement.lang = lang;
             document.getElementById('current-lang').textContent = translations[lang]['currentLang'];
-            document.getElementById('current-lang-mobile').textContent = translations[lang]['currentLang'];
             localStorage.setItem('language', lang);
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Animation logic
             const faders = document.querySelectorAll('.fade-in');
             const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
             const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
@@ -486,100 +390,51 @@
             }, appearOptions);
             faders.forEach(fader => appearOnScroll.observe(fader));
             
-            // const switcher = document.querySelector('.language-switcher');
-            // const switcherButton = document.querySelector('.language-switcher-button');
-            // const dropdown = document.querySelector('.language-dropdown');
+            // --- MODIFICATION: Click-based Language Switcher Logic ---
+            const switcher = document.querySelector('.language-switcher');
+            const switcherButton = document.querySelector('.language-switcher-button');
+            const dropdown = document.querySelector('.language-dropdown');
 
-            // switcherButton.addEventListener('click', (event) => {
-            //     event.stopPropagation();
-            //     switcher.classList.toggle('active');
-            // });
+            switcherButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent this click from being caught by the window listener
+                switcher.classList.toggle('active');
+            });
 
-            // dropdown.addEventListener('click', (event) => {
-            //     event.preventDefault();
-            //     const lang = event.target.getAttribute('data-lang');
-            //     if (lang) {
-            //         setLanguage(lang);
-            //         switcher.classList.remove('active');
-            //     }
-            // });
+            dropdown.addEventListener('click', (event) => {
+                event.preventDefault();
+                const lang = event.target.getAttribute('data-lang');
+                if (lang) {
+                    setLanguage(lang);
+                    switcher.classList.remove('active'); // Close dropdown after selection
+                }
+            });
             
-            // window.addEventListener('click', () => {
-            //     if (switcher.classList.contains('active')) {
-            //         switcher.classList.remove('active');
-            //     }
-            // });
-
-            // --- Language Switcher Logic (for both desktop and mobile) ---
-            const allSwitchers = document.querySelectorAll('.language-switcher');
-
-            allSwitchers.forEach(switcher => {
-                const button = switcher.querySelector('.language-switcher-button');
-                const dropdown = switcher.querySelector('.language-dropdown');
-
-                if (button && dropdown) {
-                    button.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                        
-                        // Close other active switchers before opening a new one
-                        allSwitchers.forEach(s => {
-                            if (s !== switcher) {
-                                s.classList.remove('active');
-                            }
-                        });
-
-                        switcher.classList.toggle('active');
-                    });
-
-                    dropdown.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        const lang = event.target.getAttribute('data-lang');
-                        if (lang) {
-                            setLanguage(lang);
-                            // No need to close the switcher here, it will be closed by the window click listener
-                        }
-                    });
+            // Close dropdown if clicked outside
+            window.addEventListener('click', () => {
+                if (switcher.classList.contains('active')) {
+                    switcher.classList.remove('active');
                 }
             });
 
-            // Close all active dropdowns if clicked outside
-            window.addEventListener('click', () => {
-                allSwitchers.forEach(switcher => {
-                    switcher.classList.remove('active');
-                });
-            });
+            // // Set initial language
+            // const savedLang = localStorage.getItem('language');
+            // const browserLang = navigator.language.split('-')[0];
+            
+            // if (savedLang && translations[savedLang]) {
+            //     setLanguage(savedLang);
+            // } else if (translations[browserLang]) {
+            //     setLanguage(browserLang);
+            // } else {
+            //     setLanguage('ja');
+            // }
 
+            // Set initial language
             const savedLang = localStorage.getItem('language');
             if (savedLang && translations[savedLang]) {
                 setLanguage(savedLang);
             } else {
                 setLanguage('ja');
             }
-
-            // --- Mobile Navigation Logic ---
-            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-            const mobileNavClose = document.querySelector('.mobile-nav-close');
-            const mobileNav = document.querySelector('.mobile-nav');
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-
-            if (mobileNavToggle && mobileNav) {
-                mobileNavToggle.addEventListener('click', () => {
-                    mobileNav.classList.add('active');
-                });
-            }
-
-            if (mobileNavClose && mobileNav) {
-                mobileNavClose.addEventListener('click', () => {
-                    mobileNav.classList.remove('active');
-                });
-            }
-
-            // Close mobile nav when a link is clicked (for single-page navigation)
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileNav.classList.remove('active');
-                });
-            });
         });
     </script>
 </body>
